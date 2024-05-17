@@ -1,0 +1,62 @@
+const numeroSenha = document.querySelector('.parametro senha__texto'); 
+ let tamanhoSenha = 12; 
+ numeroSenha.textContent = tamanhoSenha; 
+ const letrasMaiusculas = 'ABCDEFGHIJKLMNOPQRSTUVXYWZ'; 5) const letrasMinusculas = 'abcdefghijklmnopqrstuvxywz'; 6) const numeros = '0123456789'; 
+ const simbolos = '!@%*?'; 
+ const botoes = document.querySelectorAll('.parametro senha__botao'); 
+ const campoSenha = document.querySelector('#campo-senha'); 10)const checkbox = document.querySelectorAll('.checkbox'); 11)const forcaSenha = document.querySelector('.forca'); 
+botoes[0].onclick = diminuiTamanho; 
+botoes[1].onclick = aumentaTamanho; 
+function diminuiTamanho() { 
+if (tamanhoSenha > 1) {
+a. // tamanhoSenha = tamanhoSenha-1; 
+b. tamanhoSenha--; 
+} 
+numeroSenha.textContent = tamanhoSenha; 
+geraSenha(); 
+} 
+function aumentaTamanho() { 
+if (tamanhoSenha < 20) { 
+a. // tamanhoSenha = tamanhoSenha+1; 
+b. tamanhoSenha++; 
+} 
+numeroSenha.textContent = tamanhoSenha; 
+geraSenha(); 
+} 
+for (i = 0; i < checkbox.length; i++) { 
+checkbox[i].onclick = geraSenha; 
+} 
+geraSenha(); 
+function geraSenha() { 
+let alfabeto = ''; 
+if (checkbox[0].checked) { 
+a. alfabeto = alfabeto + letrasMaiusculas; 
+} 
+if (checkbox[1].checked) { 
+a. alfabeto = alfabeto + letrasMinusculas; 
+} 
+if (checkbox[2].checked) { 
+a. alfabeto = alfabeto + numeros; 
+} 
+if (checkbox[3].checked) { 
+a. alfabeto = alfabeto + simbolos; 
+} 
+let senha = ''; 
+for (let i = 0; i < tamanhoSenha; i++) { 
+a. let numeroAleatorio = Math.random() * alfabeto.length; b. numeroAleatorio = Math.floor(numeroAleatorio); c. senha = senha + alfabeto[numeroAleatorio]; 
+} 
+campoSenha.value = senha; 
+classificaSenha(alfabeto.length); 
+} 
+function classificaSenha(tamanhoAlfabeto){ 
+let entropia = tamanhoSenha * Math.log2(tamanhoAlfabeto); 48)console.log(entropia);
+forcaSenha.classList.remove('fraca','media','forte'); 50)if (entropia > 57){ 
+a. forcaSenha.classList.add('forte'); 
+} else if (entropia > 35 && entropia < 57 ) { 
+a. forcaSenha.classList.add('media'); 
+} else if (entropia <= 35){ 
+a. forcaSenha.classList.add('fraca'); 
+} 
+const valorEntropia = document.querySelector('.entropia'); 55)valorEntropia.textContent = 
+2**Math.floor(entropia)/(100e6*60*60*24); 
+} 
